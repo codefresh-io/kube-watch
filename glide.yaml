@@ -1,0 +1,16 @@
+package: .
+import:
+- package: github.com/urfave/cli
+  version: ~1.20.0
+- package: k8s.io/api
+  subpackages:
+  - core/v1
+- package: k8s.io/apimachinery
+  subpackages:
+  - pkg/fields
+- package: k8s.io/client-go
+  version: ~4.0.0
+  subpackages:
+  - kubernetes
+  - tools/cache
+  - tools/clientcmd

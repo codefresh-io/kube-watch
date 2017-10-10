@@ -1,0 +1,10 @@
+examples:
+kube-watch start // command to start from in cluster
+
+kube-watch run // apply deployment into current cluster
+--kube-config
+
+kube-watch install // read ~/.kube/config and apply inself onto current-context.
+ --contex={contex-name}
+ --kubeConfig={path}
+ --namespace={apply into other namespace}
