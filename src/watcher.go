@@ -13,8 +13,7 @@ import (
 )
 
 func watch(clientset *kubernetes.Clientset, context *cli.Context) {
-	watchlist := cache.NewListWatchFromClient(clientset.Core().RESTClient(), "events", v1.NamespaceDefault,
-		fields.Everything())
+	watchlist := cache.NewListWatchFromClient(clientset.Core().RESTClient(), "events", v1.NamespaceAll, fields.Everything())
 	_, controller := cache.NewInformer(
 		watchlist,
 		&v1.Event{},

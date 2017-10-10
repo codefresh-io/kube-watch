@@ -5,12 +5,16 @@ import (
 	"encoding/gob"
 	"encoding/json"
 	"net/http"
+	"strings"
 )
 
 func doPost(obj interface{}, url string) {
 	mar, _ := json.Marshal(obj)
-	jsonStr := []byte(string(mar))
-	http.Post(url, "Application/json", bytes.NewBuffer(jsonStr))
+	var buffer bytes.Buffer
+	buffer.WriteString(`{ "body":`)
+	buffer.WriteString(string(mar))
+	buffer.WriteString(`}`)
+	http.Post(url, "Application/json", strings.NewReader(buffer.String()))
 }
 
 func GetBytes(key interface{}) []byte {

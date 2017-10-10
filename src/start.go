@@ -28,7 +28,6 @@ func dryRun(c *cli.Context) {
 	if err == nil {
 		watch(clientset, c)
 	} else {
-		fmt.Println(err)
 		panic(err)
 	}
 }
