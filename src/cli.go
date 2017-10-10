@@ -6,18 +6,13 @@ import (
 
 func setupCli() *cli.App {
 	app := cli.NewApp()
-	app.Name = "boom"
-	app.Usage = "make an explosive entrance"
-	setupFlags(app)
+	app.Name = "kube-watch"
+	setupCommands(app)
 	return app
 }
 
-func setupFlags(app *cli.App) {
-	app.Commands = setupCommands()
-}
-
-func setupCommands() []cli.Command {
-	return []cli.Command{
+func setupCommands(app *cli.App) {
+	app.Commands = []cli.Command{
 		{
 			Name:   "run",
 			Action: onStart, // todo : rename to something like InstallKubeWatchInCluster
