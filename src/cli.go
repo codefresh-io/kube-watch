@@ -14,22 +14,13 @@ func setupCli() *cli.App {
 func setupCommands(app *cli.App) {
 	app.Commands = []cli.Command{
 		{
-			Name:   "run",
-			Action: onStart, // todo : rename to something like InstallKubeWatchInCluster
-		},
-		{
-			Name:   "start",
-			Action: onStart,
+			Name:        "run",
+			Description: "Watch from localhost on current-context in ~/.kube/config",
+			Action:      dryRun,
 			Flags: []cli.Flag{
-				cli.BoolFlag{
-					Name: "dry-run",
-				},
 				cli.StringFlag{
 					Name:  "kube-config",
 					Value: "~/.kube/config",
-				},
-				cli.StringSliceFlag{
-					Name: "watch-on",
 				},
 			},
 		},
