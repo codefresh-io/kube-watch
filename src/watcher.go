@@ -40,7 +40,7 @@ func onAdd(obj interface{}, context *cli.Context) {
 		if context.IsSet("url") == true {
 			doPost(obj, context.String("url"))
 		}
-		if context.IsSet("slack-channel") == true {
+		if context.IsSet("slack-channel-url") == true {
 			sendMessageToSlackChannel(ev, context.String("slack-channel-url"))
 		}
 	}
