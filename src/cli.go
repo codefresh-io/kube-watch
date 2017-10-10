@@ -43,6 +43,11 @@ func setupCommands(app *cli.App) {
 					Name:  "slack-channel",
 					Usage: "Sent event to slack channel url",
 				},
+				cli.StringFlag{
+					Name:  "watch-type",
+					Usage: "Types of event to watch on (Warning, Normal)",
+					Value: "ALL",
+				},
 			},
 		},
 	}

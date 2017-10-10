@@ -35,11 +35,13 @@ func watch(clientset *kubernetes.Clientset, context *cli.Context) {
 func onAdd(obj interface{}, context *cli.Context) {
 	ev := obj.(*v1.Event)
 	fmt.Println(ev.InvolvedObject.Kind)
-
-	if context.IsSet("url") == true {
-		doPost(obj, context.String("url"))
-	}
-	if context.IsSet("slack-channel") == true {
-		sendMessageToSlackChannel(ev, context.String("slack-channel"))
+	watchType := context.String("watch-type")
+	if ev.Type == watchType || watchType == "ALL" {
+		if context.IsSet("url") == true {
+			doPost(obj, context.String("url"))
+		}
+		if context.IsSet("slack-channel") == true {
+			sendMessageToSlackChannel(ev, context.String("slack-channel"))
+		}
 	}
 }
