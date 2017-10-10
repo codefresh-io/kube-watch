@@ -22,5 +22,11 @@ func dryRun(c *cli.Context) {
 	}
 	// create the clientset
 	clientset, err := kubernetes.NewForConfig(config)
-	watch(clientset)
+
+	if c.IsSet("url") == true {
+		urlToPost := c.String("url")
+		watch(clientset, urlToPost)
+	} else {
+		watch(clientset, "")
+	}
 }

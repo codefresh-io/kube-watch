@@ -22,6 +22,10 @@ func setupCommands(app *cli.App) {
 					Name:  "kube-config",
 					Value: "~/.kube/config",
 				},
+				cli.StringFlag{
+					Name:  "url",
+					Usage: "Url where to sent the hook",
+				},
 			},
 		},
 	}

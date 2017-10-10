@@ -10,7 +10,7 @@ import (
 	"k8s.io/client-go/tools/cache"
 )
 
-func watch(clientset *kubernetes.Clientset) {
+func watch(clientset *kubernetes.Clientset, url string) {
 	watchlist := cache.NewListWatchFromClient(clientset.Core().RESTClient(), "events", v1.NamespaceDefault,
 		fields.Everything())
 	_, controller := cache.NewInformer(
@@ -21,7 +21,7 @@ func watch(clientset *kubernetes.Clientset) {
 			AddFunc: func(obj interface{}) {
 				ev := obj.(*v1.Event)
 				fmt.Println(ev.InvolvedObject.Kind)
-				doPost(obj)
+				doPost(obj, url)
 			},
 		},
 	)

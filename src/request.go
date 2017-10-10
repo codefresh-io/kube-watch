@@ -4,13 +4,18 @@ import (
 	"bytes"
 	"encoding/gob"
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
-func doPost(obj interface{}) {
+func doPost(obj interface{}, url string) {
 	mar, _ := json.Marshal(obj)
 	jsonStr := []byte(string(mar))
-	http.Post("http://webhook.site/0b6f9345-2b5a-4a3b-9459-ed9e03dbbbde", "Application/json", bytes.NewBuffer(jsonStr))
+	if url == "" {
+		fmt.Println(string(mar))
+	} else {
+		http.Post(url, "Application/json", bytes.NewBuffer(jsonStr))
+	}
 
 }
 
