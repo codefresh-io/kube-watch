@@ -21,14 +21,7 @@ func watch(clientset *kubernetes.Clientset, context *cli.Context) {
 		time.Second*0,
 		cache.ResourceEventHandlerFuncs{
 			AddFunc: func(obj interface{}) {
-				ev := obj.(*v1.Event)
-				fmt.Println(ev.InvolvedObject.Kind)
-				if context.IsSet("url") == true {
-					doPost(obj, context.String("url"))
-				}
-				if context.IsSet("slack-channel") == true {
-					sendMessageToSlackChannel(ev, context.String("slack-channel"))
-				}
+				onAdd(obj, context)
 			},
 		},
 	)
@@ -36,5 +29,17 @@ func watch(clientset *kubernetes.Clientset, context *cli.Context) {
 	go controller.Run(stop)
 	for {
 		time.Sleep(time.Second)
+	}
+}
+
+func onAdd(obj interface{}, context *cli.Context) {
+	ev := obj.(*v1.Event)
+	fmt.Println(ev.InvolvedObject.Kind)
+
+	if context.IsSet("url") == true {
+		doPost(obj, context.String("url"))
+	}
+	if context.IsSet("slack-channel") == true {
+		sendMessageToSlackChannel(ev, context.String("slack-channel"))
 	}
 }

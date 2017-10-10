@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 
 	"github.com/urfave/cli"
 )
@@ -20,6 +21,15 @@ func setupCommands(app *cli.App) {
 			Name:        "run",
 			Description: "Watch from localhost on current-context in ~/.kube/config",
 			Action:      dryRun,
+			Before: func(c *cli.Context) error {
+				path := c.String("kube-config")
+				dir := os.Getenv("HOME")
+				if path[:2] == "~/" {
+					path = filepath.Join(dir, path[2:])
+					c.Set("kube-config", path)
+				}
+				return nil
+			},
 			Flags: []cli.Flag{
 				cli.StringFlag{
 					Name:  "kube-config",
