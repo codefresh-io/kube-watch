@@ -12,7 +12,7 @@ import (
 func sendMessageToSlackChannel(ev *v1.Event, url string) {
 	var buffer bytes.Buffer
 
-	msg := SlackMessage{
+	msg := slackMessage{
 		InvolvedObjectKind: ev.InvolvedObject.Kind,
 		InvolvedObjectName: ev.InvolvedObject.Name,
 		Type:               ev.Type,
