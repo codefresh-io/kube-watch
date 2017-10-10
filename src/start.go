@@ -20,7 +20,7 @@ func onStart(c *cli.Context) {
 
 func runDryRun(c *cli.Context) {
 	fmt.Println("Running in dry-run mode")
-	fmt.Println("Fetching context from config %s", c.String("kube-config"))
+	fmt.Println("Fetching context from config", c.String("kube-config"))
 	var kubeconfig *string
 	kubeconfig = flag.String("kubeconfig", filepath.Join(os.Getenv("HOME"), ".kube", "config"), "(optional) absolute path to the kubeconfig file")
 	flag.Parse()
