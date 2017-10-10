@@ -28,7 +28,7 @@ func sendMessageToSlackChannel(ev *v1.Event, url string) {
 	http.Post(url, "application/x-www-form-urlencoded", strings.NewReader(buffer.String()))
 }
 
-type SlackMessage struct {
+type slackMessage struct {
 	InvolvedObjectName string
 	InvolvedObjectKind string
 	Type               string
@@ -37,7 +37,7 @@ type SlackMessage struct {
 	Namesapce          string
 }
 
-func (sm SlackMessage) toString() string {
+func (sm slackMessage) toString() string {
 	return fmt.Sprintf("Resource name: %s.\nResoucre kind: %s.\nEvent type: %s.\nEvent reason: %s.\nEvent message: %s.\nNamespace: %s", sm.InvolvedObjectName, sm.InvolvedObjectKind, formatEventType(sm.Type), sm.Reason, sm.Message, sm.Namesapce)
 }
 
