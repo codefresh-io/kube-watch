@@ -40,7 +40,7 @@ func setupCommands(app *cli.App) {
 					Usage: "Url where to sent the hook",
 				},
 				cli.StringFlag{
-					Name:  "slack-channel",
+					Name:  "slack-channel-url",
 					Usage: "Sent event to slack channel url",
 				},
 				cli.StringFlag{

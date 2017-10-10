@@ -38,5 +38,12 @@ type SlackMessage struct {
 }
 
 func (sm SlackMessage) toString() string {
-	return fmt.Sprintf("Resource name: %s.\nResoucre kind: %s.\nEvent type: %s.\nEvent reason: %s.\nEvent message: %s.\nNamespace: %s", sm.InvolvedObjectName, sm.InvolvedObjectKind, sm.Type, sm.Reason, sm.Message, sm.Namesapce)
+	return fmt.Sprintf("Resource name: %s.\nResoucre kind: %s.\nEvent type: %s.\nEvent reason: %s.\nEvent message: %s.\nNamespace: %s", sm.InvolvedObjectName, sm.InvolvedObjectKind, formatEventType(sm.Type), sm.Reason, sm.Message, sm.Namesapce)
+}
+
+func formatEventType(str string) string {
+	if str == "Warning" {
+		return fmt.Sprintf("*%s*", str)
+	}
+	return str
 }
