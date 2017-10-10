@@ -1,10 +1,9 @@
 package main
 
 import (
-	"flag"
+	"bytes"
 	"fmt"
 	"os"
-	"path/filepath"
 
 	"github.com/urfave/cli"
 	"k8s.io/client-go/kubernetes"
@@ -13,20 +12,23 @@ import (
 
 func dryRun(c *cli.Context) {
 	fmt.Println("Running on current-context from", c.String("kube-config"))
-	var kubeconfig *string
-	kubeconfig = flag.String("kubeconfig", filepath.Join(os.Getenv("HOME"), ".kube", "config"), "(optional) absolute path to the kubeconfig file")
-	flag.Parse()
-	config, err := clientcmd.BuildConfigFromFlags("", *kubeconfig)
+	var kubeconfig string
+	var buffer bytes.Buffer
+	buffer.WriteString(os.Getenv("HOME"))
+	buffer.WriteString("/.kube/config")
+	kubeconfig = buffer.String()
+	config, err := clientcmd.BuildConfigFromFlags("", kubeconfig)
 	if err != nil {
 		panic(err.Error())
+	} else {
+		fmt.Println("kubeconfig ", kubeconfig)
 	}
 	// create the clientset
 	clientset, err := kubernetes.NewForConfig(config)
-
-	if c.IsSet("url") == true {
-		urlToPost := c.String("url")
-		watch(clientset, urlToPost)
+	if err == nil {
+		watch(clientset, c)
 	} else {
-		watch(clientset, "")
+		fmt.Println(err)
+		panic(err)
 	}
 }
