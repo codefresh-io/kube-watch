@@ -23,7 +23,7 @@ func sendMessageToSlackChannel(ev *v1.Event, url string) {
 
 	buffer.WriteString(`{ "text": "`)
 	buffer.WriteString(msg.toString())
-	buffer.WriteString(`"}`)
+	buffer.WriteString(`", "icon_emoji": ":watch:"}`)
 	fmt.Println(buffer.String())
 	http.Post(url, "application/x-www-form-urlencoded", strings.NewReader(buffer.String()))
 }
