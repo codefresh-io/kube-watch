@@ -3,7 +3,6 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"os"
 
 	"github.com/urfave/cli"
 	"k8s.io/client-go/kubernetes"
@@ -14,8 +13,7 @@ func dryRun(c *cli.Context) {
 	fmt.Println("Running on current-context from", c.String("kube-config"))
 	var kubeconfig string
 	var buffer bytes.Buffer
-	buffer.WriteString(os.Getenv("HOME"))
-	buffer.WriteString("/.kube/config")
+	buffer.WriteString(c.String("kube-config"))
 	kubeconfig = buffer.String()
 	config, err := clientcmd.BuildConfigFromFlags("", kubeconfig)
 	if err != nil {

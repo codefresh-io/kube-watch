@@ -1,6 +1,9 @@
 package main
 
 import (
+	"fmt"
+	"os"
+
 	"github.com/urfave/cli"
 )
 
@@ -20,11 +23,15 @@ func setupCommands(app *cli.App) {
 			Flags: []cli.Flag{
 				cli.StringFlag{
 					Name:  "kube-config",
-					Value: "~/.kube/config",
+					Value: fmt.Sprintf("%s/.kube/config", os.Getenv("HOME")),
 				},
 				cli.StringFlag{
 					Name:  "url",
 					Usage: "Url where to sent the hook",
+				},
+				cli.StringFlag{
+					Name:  "slack-channel",
+					Usage: "Sent event to slack channel url",
 				},
 			},
 		},
