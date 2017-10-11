@@ -6,5 +6,6 @@ RUN curl https://glide.sh/get | sh
 RUN glide install
 ENV GOPATH=/go:/kube-watch/vendor
 RUN cd vendor && find . -maxdepth 1 | grep -v ./src | sed -n '1!p' | xargs -i mv {} ./src && cd ..
-# RUN "./scripts/BUILD.sh"
+RUN cd vendor/src && ls
+RUN "./scripts/BUILD.sh"
 # CMD ["./kube-watch"]
