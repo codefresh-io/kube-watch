@@ -45,7 +45,12 @@ func setupCommands(app *cli.App) {
 				},
 				cli.StringFlag{
 					Name:  "watch-type",
-					Usage: "Types of event to watch on (Warning, Normal)",
+					Usage: "Type of event to watch on (Warning, Normal)",
+					Value: "ALL",
+				},
+				cli.StringFlag{
+					Name:  "watch-kind",
+					Usage: "Kind of K8S resource to watch on (Pod, Service). Alias not supported",
 					Value: "ALL",
 				},
 			},
