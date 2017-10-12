@@ -30,7 +30,7 @@ func installInCluster(c *cli.Context) {
 						{
 							Name:            "kube-watch",
 							ImagePullPolicy: "Always",
-							Image:           "olsynt/kubewatch:command-start",
+							Image:           "olsynt/kubewatch:master",
 							Args:            prepareContainerArgs(c),
 						},
 					},
