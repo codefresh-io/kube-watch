@@ -29,7 +29,7 @@ func installInCluster(c *cli.Context) {
 					Containers: []apiv1.Container{
 						{
 							Name:  "kube-watch",
-							Image: "olsynt/kubewatch:master",
+							Image: "olsynt/kubewatch:command-start",
 							Command: []string{
 								"run --in-cluster --url https://webhook.site/#/4381e90c-2d30-4bee-b533-093f700ce2d8",
 							},
