@@ -1,3 +1,4 @@
+[![Codefresh build status]( https://g.codefresh.io/api/badges/build?repoOwner=codefresh-io&repoName=kube-watch&branch=master&pipelineName=kube-watch&accountName=codefresh-inc&type=cf-1)]( https://g.codefresh.io/repositories/codefresh-io/kube-watch/builds?filter=trigger:build;branch:master;service:59df83bcd2ab0a000130a8b9~kube-watch)
 # Kube watch
 Simple tool that watch on events from your Kubernetes cluster and push them as webhooks
 
