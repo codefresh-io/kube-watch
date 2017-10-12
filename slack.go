@@ -26,7 +26,7 @@ func sendMessageToSlackChannel(ev *v1.Event, url string) {
 	buffer.WriteString(`", "icon_emoji": ":watch:"}`)
 	res, err := http.Post(url, "application/x-www-form-urlencoded", strings.NewReader(buffer.String()))
 	if err != nil {
-		fmt.Println(err.Error())
+		panic(err.Error())
 	}
 	fmt.Println(res.Status)
 }

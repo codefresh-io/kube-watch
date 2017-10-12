@@ -1,2 +1,4 @@
 kube-watch
 dist
+src/
+pkg/
