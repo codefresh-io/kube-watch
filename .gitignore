@@ -1,3 +1,5 @@
 .vscode
 debug
 kube-watch
+vendor/pkg
+idea
