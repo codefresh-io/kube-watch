@@ -28,8 +28,9 @@ func installInCluster(c *cli.Context) {
 				Spec: apiv1.PodSpec{
 					Containers: []apiv1.Container{
 						{
-							Name:  "kube-watch",
-							Image: "olsynt/kubewatch:command-start",
+							Name:            "kube-watch",
+							ImagePullPolicy: "Always",
+							Image:           "olsynt/kubewatch:command-start",
 							Command: []string{
 								"run --in-cluster --url https://webhook.site/#/4381e90c-2d30-4bee-b533-093f700ce2d8",
 							},
