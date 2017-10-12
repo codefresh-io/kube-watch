@@ -19,7 +19,7 @@ Run `kube-watch run --url {url}` to start watching on events across all namespac
 ```
 
 # Run in docker container
-`docker run -v ~/.kube/config:/config codefreshio/kubewatcher run --url {url}  --kube-config /config`
+`docker run -v ~/.kube/config:/config codefresh/kubewatch run --url {url}  --kube-config /config`
 
 
 # Install kube-watch in your cluster
@@ -48,7 +48,7 @@ spec:
         - run
         - --in-cluster
         # And all flags passed to `kube-watch run` command
-        image: codefreshio/kubewatch:command-start
+        image: codefresh/kubewatch:command-start
         imagePullPolicy: Always
         name: kube-watch
 ```

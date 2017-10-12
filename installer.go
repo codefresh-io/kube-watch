@@ -30,7 +30,7 @@ func installInCluster(c *cli.Context) {
 						{
 							Name:            "kube-watch",
 							ImagePullPolicy: "Always",
-							Image:           "codefreshio/kubewatch:master",
+							Image:           "codefresh/kubewatch:master",
 							Args:            prepareContainerArgs(c),
 						},
 					},
