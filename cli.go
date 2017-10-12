@@ -20,7 +20,7 @@ func setupCommands(app *cli.App) {
 		{
 			Name:        "run",
 			Description: "Watch from localhost on current-context in ~/.kube/config",
-			Action:      dryRun,
+			Action:      watch,
 			Before: func(c *cli.Context) error {
 				path := c.String("kube-config")
 				dir := os.Getenv("HOME")
@@ -52,6 +52,17 @@ func setupCommands(app *cli.App) {
 					Name:  "watch-kind",
 					Usage: "Kind of K8S resource to watch on (Pod, Service). Alias not supported",
 					Value: "ALL",
+				},
+			},
+		},
+		{
+			Name:        "install",
+			Description: "Instal kube-watch on you cluster",
+			Action:      installInCluster,
+			Flags: []cli.Flag{
+				cli.StringFlag{
+					Name:  "kube-config",
+					Value: fmt.Sprintf("%s/.kube/config", os.Getenv("HOME")),
 				},
 			},
 		},
