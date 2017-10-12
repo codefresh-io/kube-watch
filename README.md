@@ -53,8 +53,9 @@ spec:
         name: kube-watch
 ```
 # Todo:
+* [ ] Tests!
 * [ ] Supoort install on different namespaces
-* [ ] Add update command to update the image
+* [ ] Add update/uninstall commands to update the image and remove the deployment
 * [ ] Support more integrations
 * [ ] Support more complexity
 * [ ] Support secret to be added in request header
