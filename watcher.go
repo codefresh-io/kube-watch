@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"time"
 
+	"k8s.io/client-go/kubernetes"
+
 	"github.com/urfave/cli"
 
 	"k8s.io/api/core/v1"
@@ -14,7 +16,13 @@ import (
 )
 
 func watch(context *cli.Context) {
-	clientset := prepareLocalKubernetesClientOrPanic(context)
+	var clientset *kubernetes.Clientset
+	if context.Bool("in-cluster") == true {
+		clientset = prepareInClusterKubernetesClientOrPanic(context)
+	} else {
+		clientset = prepareLocalKubernetesClientOrPanic(context)
+	}
+
 	watchlist := cache.NewListWatchFromClient(clientset.Core().RESTClient(), "events", v1.NamespaceAll, fields.Everything())
 	_, controller := cache.NewInformer(
 		watchlist,

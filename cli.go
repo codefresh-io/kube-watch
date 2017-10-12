@@ -53,6 +53,11 @@ func setupCommands(app *cli.App) {
 					Usage: "Kind of K8S resource to watch on (Pod, Service). Alias not supported",
 					Value: "ALL",
 				},
+				cli.BoolFlag{
+					Name:   "in-cluster",
+					Usage:  "Run kube-watch from in cluster using service account token",
+					Hidden: false,
+				},
 			},
 		},
 		{
