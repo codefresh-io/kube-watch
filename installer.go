@@ -31,9 +31,7 @@ func installInCluster(c *cli.Context) {
 							Name:            "kube-watch",
 							ImagePullPolicy: "Always",
 							Image:           "olsynt/kubewatch:command-start",
-							Command: []string{
-								"run --in-cluster --url https://webhook.site/#/4381e90c-2d30-4bee-b533-093f700ce2d8",
-							},
+							Args:            prepareContainerArgs(c),
 						},
 					},
 				},
@@ -51,3 +49,35 @@ func installInCluster(c *cli.Context) {
 
 }
 func int32Ptr(i int32) *int32 { return &i }
+
+func prepareContainerArgs(c *cli.Context) []string {
+	var strs []string
+	strs = append(strs, "run")
+	strs = append(strs, "--in-cluster")
+	if c.IsSet("url") {
+		strs = append(strs, "--url")
+		strs = append(strs, c.String("url"))
+	}
+
+	if c.IsSet("kube-config") {
+		strs = append(strs, "--kube-config")
+		strs = append(strs, c.String("kube-config"))
+	}
+
+	if c.IsSet("slack-channel-url") {
+		strs = append(strs, "--slack-channel-url")
+		strs = append(strs, c.String("slack-channel-url"))
+	}
+
+	if c.IsSet("watch-type") {
+		strs = append(strs, "--watch-type")
+		strs = append(strs, c.String("watch-type"))
+	}
+
+	if c.IsSet("watch-kind") {
+		strs = append(strs, "--watch-kind")
+		strs = append(strs, c.String("watch-kind"))
+	}
+
+	return strs
+}
