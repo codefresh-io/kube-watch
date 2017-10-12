@@ -6,6 +6,7 @@ import (
 
 	"github.com/urfave/cli"
 	"k8s.io/client-go/kubernetes"
+	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
 )
 
@@ -23,9 +24,21 @@ func prepareLocalKubernetesClientOrPanic(c *cli.Context) *kubernetes.Clientset {
 	}
 	// create the clientset
 	clientset, err := kubernetes.NewForConfig(config)
-	if err == nil {
-		return clientset
-	} else {
-		panic(err)
+	if err != nil {
+		panic(err.Error())
 	}
+	return clientset
+}
+
+func prepareInClusterKubernetesClientOrPanic(c *cli.Context) *kubernetes.Clientset {
+	config, err := rest.InClusterConfig()
+	if err != nil {
+		panic(err.Error())
+	}
+	// creates the clientset
+	clientset, err := kubernetes.NewForConfig(config)
+	if err != nil {
+		panic(err.Error())
+	}
+	return clientset
 }
