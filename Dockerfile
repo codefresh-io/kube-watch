@@ -1,12 +1,7 @@
 FROM golang:latest
-RUN mkdir /kube-watch
-WORKDIR /kube-watch
+RUN mkdir -p /go/src/github.com/olsynt/kube-event-watcher
+WORKDIR /go/src/github.com/olsynt/kube-event-watcher
 COPY . .
-RUN curl https://glide.sh/get | sh
-RUN glide install
-RUN cd vendor && ls && cd ..
-ENV GOPATH=/go:/kube-watch/vendor
-RUN cd vendor && mkdir src && mv $(find . -maxdepth 1 | grep -v ./src | sed -n '1!p') ./src && cd ..
-RUN cd vendor/src && ls
 RUN "./scripts/BUILD.sh"
-CMD ["./kube-watch"]
+ENTRYPOINT ["./kube-watch"]
+CMD ["--help"]
