@@ -2,7 +2,7 @@
 Simple tool that watch on events from your Kubernetes cluster and push them as webhooks
 
 # Install 
-`go get github.com/olsynt/kube-watch`
+`go get github.com/codefresh-io/kube-watch`
 
 # Run
 Get you test hebhook url from https://webhook.site
@@ -11,7 +11,7 @@ Run `kube-watch run --url {url}` to start watching on events across all namespac
 ## More functionallity
 `kube watch run --help`
 ```
-   --kube-config value        (default: "/home/olsynt/.kube/config")
+   --kube-config value        (default: "$HOME/.kube/config")
    --url value                Url where to sent the hook
    --slack-channel-url value  Sent event to slack channel url
    --watch-type value         Type of event to watch on (Warning, Normal) (default: "ALL")
@@ -19,7 +19,7 @@ Run `kube-watch run --url {url}` to start watching on events across all namespac
 ```
 
 # Run in docker container
-`docker run -v ~/.kube/config:/config olsynt/kube-watcher run --url {url}  --kube-config /config`
+`docker run -v ~/.kube/config:/config codefreshio/kubewatcher run --url {url}  --kube-config /config`
 
 
 # Install kube-watch in your cluster
@@ -48,7 +48,7 @@ spec:
         - run
         - --in-cluster
         # And all flags passed to `kube-watch run` command
-        image: olsynt/kubewatch:command-start
+        image: codefreshio/kubewatch:command-start
         imagePullPolicy: Always
         name: kube-watch
 ```
