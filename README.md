@@ -21,6 +21,10 @@ Run `kube-watch run --url {url}` to start watching on events across all namespac
 # Run in docker container
 `docker run -v ~/.kube/config:/config olsynt/kube-watcher run --url {url}  --kube-config /config`
 
+
+# Install kube-watch in your cluster
+Run `kube-watch install` will apply new deployment in the default namespace of cluster in current-context.
+Optional `kube-watch install --kube-config {path to config}`
+
 # Roadmap
 * Add `start` command that will start watching from in cluster
-* Add `install` command to setup K8S deployment in current cluster to run from the cluster itself
