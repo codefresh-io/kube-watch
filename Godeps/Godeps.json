@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.com/olsynt/kube-event-watcher",
+	"ImportPath": "github.com/ocodefresh-io/kube-watch",
 	"GoVersion": "go1.9",
 	"GodepVersion": "v79",
 	"Deps": [
