@@ -59,6 +59,12 @@ func setupCommands(app *cli.App) {
 			Name:        "install",
 			Description: "Instal kube-watch on you cluster",
 			Action:      installInCluster,
+			Flags: []cli.Flag{
+				cli.StringFlag{
+					Name:  "kube-config",
+					Value: fmt.Sprintf("%s/.kube/config", os.Getenv("HOME")),
+				},
+			},
 		},
 	}
 }
