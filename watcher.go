@@ -8,13 +8,13 @@ import (
 
 	"k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/fields"
-	"k8s.io/client-go/kubernetes"
 	_ "k8s.io/client-go/plugin/pkg/client/auth/gcp"
 
 	"k8s.io/client-go/tools/cache"
 )
 
-func watch(clientset *kubernetes.Clientset, context *cli.Context) {
+func watch(context *cli.Context) {
+	clientset := prepareLocalKubernetesClientOrPanic(context)
 	watchlist := cache.NewListWatchFromClient(clientset.Core().RESTClient(), "events", v1.NamespaceAll, fields.Everything())
 	_, controller := cache.NewInformer(
 		watchlist,

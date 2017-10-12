@@ -9,7 +9,7 @@ import (
 	"k8s.io/client-go/tools/clientcmd"
 )
 
-func dryRun(c *cli.Context) {
+func prepareLocalKubernetesClientOrPanic(c *cli.Context) *kubernetes.Clientset {
 	fmt.Println("Running on current-context from", c.String("kube-config"))
 	var kubeconfig string
 	var buffer bytes.Buffer
@@ -24,7 +24,7 @@ func dryRun(c *cli.Context) {
 	// create the clientset
 	clientset, err := kubernetes.NewForConfig(config)
 	if err == nil {
-		watch(clientset, c)
+		return clientset
 	} else {
 		panic(err)
 	}
