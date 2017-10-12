@@ -49,7 +49,7 @@ spec:
         - run
         - --in-cluster
         # And all flags passed to `kube-watch run` command
-        image: codefresh/kubewatch:command-start
+        image: codefresh/kubewatch:master
         imagePullPolicy: Always
         name: kube-watch
 ```
