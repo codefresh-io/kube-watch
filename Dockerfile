@@ -7,6 +7,8 @@ RUN "./scripts/BUILD.sh"
 
 FROM alpine:3.6
 
+RUN apk add --no-cache ca-certificates
+
 COPY --from=builder /go/src/github.com/olsynt/kube-event-watcher/dist/bin/kube-watch /usr/bin/kube-watch
 ENV PATH $PATH:/usr/bin/kube-watch
 ENTRYPOINT ["kube-watch"]

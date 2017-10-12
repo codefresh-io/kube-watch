@@ -3,7 +3,6 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"strings"
 
@@ -25,19 +24,11 @@ func sendMessageToSlackChannel(ev *v1.Event, url string) {
 	buffer.WriteString(`{ "text": "`)
 	buffer.WriteString(msg.toString())
 	buffer.WriteString(`", "icon_emoji": ":watch:"}`)
-	payload := strings.NewReader(buffer.String())
-	req, _ := http.NewRequest("POST", url, payload)
-
-	req.Header.Add("content-type", "application/json")
-	req.Header.Add("cache-control", "no-cache")
-
-	res, _ := http.DefaultClient.Do(req)
-
-	defer res.Body.Close()
-	body, _ := ioutil.ReadAll(res.Body)
-
-	fmt.Println(res)
-	fmt.Println(string(body))
+	res, err := http.Post(url, "application/x-www-form-urlencoded", strings.NewReader(buffer.String()))
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	fmt.Println(res.Status)
 }
 
 type slackMessage struct {
